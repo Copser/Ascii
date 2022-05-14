@@ -36,7 +36,7 @@ defmodule AsciiWeb.Schema.AppTypes do
 
   input_object :shape_input do
     field :id, :id
-    field :coordinates, list_of(:string)
+    field :coordinates, list_of(:integer)
     field :width, :integer
     field :height, :integer
     field :outline, :string

@@ -58,9 +58,9 @@ defmodule Ascii.ActionsTest do
   end
 
   describe "shapes" do
-    @valid_attrs %{coordinates: ["5", "5"], width: 5, height: 10, outline: "none", fill: "O"}
-    @update_attrs %{coordinates: ["0", "0"], width: 15, height: 10, outline: "X", fill: "O"}
-    @invalid_attrs %{coordinates: [0, 0], width: 15, height: 10, outline: "X", fill: "O"}
+    @valid_attrs %{coordinates: [5, 5], width: 5, height: 10, outline: "none", fill: "O"}
+    @update_attrs %{coordinates: [0, 0], width: 15, height: 10, outline: "X", fill: "O"}
+    @invalid_attrs %{coordinates: ["0", "0"], width: 15, height: 10, fill: "O"}
 
     def shape_fixure(attrs) do
       attrs

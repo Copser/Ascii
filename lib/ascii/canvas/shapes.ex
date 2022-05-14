@@ -5,11 +5,11 @@ defmodule Ascii.Canvas.Shapes do
   alias Ascii.Canvas.Rectangle
 
   schema "shapes" do
-    field :coordinates, {:array, :string}, default: []
-    field :width, :integer, default: 0
-    field :height, :integer, default: 0
-    field :outline, :string, default: "none"
-    field :fill, :string, default: "none"
+    field :coordinates, {:array, :integer}
+    field :width, :integer
+    field :height, :integer
+    field :outline, :string
+    field :fill, :string
 
     belongs_to :rectangle, Rectangle
 

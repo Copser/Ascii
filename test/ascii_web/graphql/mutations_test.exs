@@ -185,12 +185,12 @@ defmodule AsciiWeb.MutationTest do
       conn =
         post(conn, "/api", %{
           "query" => @create_shape,
-          "variables" => %{coordinates: ["1", "2"], width: 4, height: 2, fill: "~", outline: "*", rectangleId: id}
+          "variables" => %{coordinates: [1, 2], width: 4, height: 2, fill: "~", outline: "*", rectangleId: id}
         })
 
       assert json_response(conn, 200) == %{"data" => %{
         "createShape" => %{
-          "coordinates" => ["1", "2"],
+          "coordinates" => [1, 2],
           "width" => 4,
           "height" => 2,
           "fill" => "~",
@@ -205,13 +205,13 @@ defmodule AsciiWeb.MutationTest do
       conn =
         post(conn, "/api", %{
           "query" => @update_shape,
-          "variables" => %{id: id, coordinates: ["10", "20"], width: 40, height: 20, fill: "~", outline: "*"}
+          "variables" => %{id: id, coordinates: [10, 20], width: 40, height: 20, fill: "~", outline: "*"}
         })
 
       assert json_response(conn, 200) == %{"data" => %{
         "updateShape" => %{
           "id" => "#{id}",
-          "coordinates" => ["10", "20"],
+          "coordinates" => [10, 20],
           "width" => 40,
           "height" => 20,
           "fill" => "~",

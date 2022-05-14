@@ -31,8 +31,8 @@ defmodule AsciiWeb.QueriesTest do
         "collections" => [
           %{
             "coordinates" => [
-              "10",
-              "3"
+              10,
+              3
             ],
             "fill" => "O",
             "height" => 6 ,
