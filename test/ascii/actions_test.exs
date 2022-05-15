@@ -2,6 +2,7 @@ defmodule Ascii.ActionsTest do
   use Ascii.DataCase
 
   alias Ascii.Actions
+  alias AsciiWeb.Factory
 
   describe "rectangle" do
     @valid_attrs %{name: "test"}
@@ -93,7 +94,6 @@ defmodule Ascii.ActionsTest do
     end
 
     test "update_shape/1 with valid data updates shape" do
-      ## TODO: Perhaps move this to DataCase??
       %{id: id} = create_rectangle()
       attrs = Map.merge(@valid_attrs, %{rectangle_id: id})
       {:ok, shape} = Actions.create_shapes(attrs)
@@ -103,6 +103,42 @@ defmodule Ascii.ActionsTest do
 
       assert shape.coordinates == @update_attrs.coordinates
       assert shape.rectangle_id == id
+    end
+  end
+
+  describe "draw fixure" do
+    test "draw first set of shapes" do
+      shapes = Factory.create_test_fixture_one(:canvas)
+
+      assert Actions.draw(shapes) |> String.trim ==
+        """
+
+           @@@@@
+           @XXX@  XXXXXXXXXXXXXX
+           @@@@@  XOOOOOOOOOOOOX
+                  XOOOOOOOOOOOOX
+                  XOOOOOOOOOOOOX
+                  XOOOOOOOOOOOOX
+                  XXXXXXXXXXXXXX
+        """
+        |> String.trim
+    end
+
+    test "draw second set of shapes" do
+      shapes = Factory.create_test_fixure_two(:canvas)
+
+      assert Actions.draw(shapes) |> String.trim ==
+        """
+                      .......
+                      .......
+                      .......
+        OOOOOOOO      .......
+        O      O      .......
+        O    XXXXX    .......
+        OOOOOXXXXX
+             XXXXX
+        """
+        |> String.trim()
     end
   end
 end
