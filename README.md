@@ -1,19 +1,94 @@
 # Ascii
 
-To start your Phoenix server:
+The project is built using
+  * Elixir (1.13.4)
+  * Erlang(24.3.3)
+  * Phoenix 1.6.6
+  * Node 12.22.7 (I guess any node 12+ will do)
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+# Setup
+Install dependencies by running
+  * `mix deps.get`
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+Create and migrate your database with 
+  * `mix ecto.setup (seed is provided)`
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+# Graphql API
 
-## Learn more
+API is built using GrahpQL, query for listing rectangles and shapes is
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+```
+  query ListRectangels {
+    canvas {
+      id
+      name
+      collections {
+        id
+        coordinates
+        width
+        height
+        outline
+        fill
+      }
+    }
+  }
+```
+
+Mutations for CRUD operations are
+
+```
+
+mutation CreateRectangle($name: String) {
+  createRectangle(rectangle: {
+  	name: $name
+  }) {
+    id
+  }
+}
+
+mutation UpdateRectangle($id: ID, $name: String) {
+  updateRectangle(rectangle: {
+    id: $id,
+    name: $name,
+  }) {
+    id
+  }
+}
+
+mutation CreateShape($coordinates: [Int], $width: Int, $height: Int, $fill: String, $outline: String, $rectangleId: Int) {
+  createShape(shape: {
+    coordinates: $coordinates,
+    width: $width,
+    height: $height,
+    fill: $fill,
+    outline: $outline,
+    rectangleId: $rectangleId,
+  }) {
+    id
+  }
+}
+
+mutation UpdateShape($id: ID, $coordinates: [Int], $width: Int, $height: Int, $fill: String, $outline: String) {
+  updateShape(shape: {
+    id: $id,
+    coordinates: $coordinates,
+    width: $width,
+    height: $height,
+    fill: $fill,
+    outline: $outline,
+  }) {
+    id
+  }
+}
+
+mutation DeleteRectangle($id: ID) {
+  deleteRectangle(id: $id) {
+    id
+  }
+}
+```
+
+# Tests
+
+Test coverage is provided and can be run with 
+  * `mix test`
