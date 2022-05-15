@@ -107,7 +107,7 @@ defmodule Ascii.ActionsTest do
   end
 
   describe "draw fixure" do
-    test "draw first set of shapes" do
+    test "draw and test first set of shapes" do
       shapes = Factory.create_test_fixture_one(:canvas)
 
       assert Actions.draw(shapes) |> String.trim ==
@@ -124,7 +124,7 @@ defmodule Ascii.ActionsTest do
         |> String.trim
     end
 
-    test "draw second set of shapes" do
+    test "drawn and test second set of shapes" do
       shapes = Factory.create_test_fixure_two(:canvas)
 
       assert Actions.draw(shapes) |> String.trim ==
